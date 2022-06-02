@@ -9,4 +9,3 @@ else:
     print("{:d} arguments:".format(argv_l-1))
     for i in range(1, argv_l):
         print("{:d}: {}".format(i, argv[i]))
-
