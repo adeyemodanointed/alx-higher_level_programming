@@ -1,8 +1,6 @@
-
 #!/usr/bin/python3
-"""
-This module contains the "Square" class
-"""
+"""This module contains the "Square" class"""
+
 
 from models.rectangle import Rectangle
 
@@ -47,8 +45,6 @@ class Square(Rectangle):
                 self.id = kwargs["id"]
             if "size" in kwargs:
                 self.size = kwargs["size"]
-            if "x" in kwargs:
-                self.x = kwargs["x"]
             if "y" in kwargs:
                 self.y = kwargs["y"]
 
