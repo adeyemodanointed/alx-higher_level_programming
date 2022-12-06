@@ -1,33 +1,27 @@
 #!/usr/bin/python3
-"""
-Write a script that lists all cities from the database hbtn_0e_4_usa
+""" Select states with names matching arguments """
 
-Your script should take 3 arguments:
-mysql username, mysql password and database name
-You must use the module MySQLdb (import MySQLdb)
-Your script should connect to a
-MySQL server running on localhost at port 3306
-Results must be sorted in ascending order by cities.id
-You can use only execute() once
-Results must be displayed as they are in the example below
-Your code should not be executed when imported
-"""
 
-if __name__ == "__main__":
-    import MySQLdb
+if __name__ == '__main__':
     from sys import argv
+    import MySQLdb
 
-    db = MySQLdb.connect(host="localhost", user=argv[1],
-                         passwd=argv[2], db=argv[3])
-    cur = db.cursor()
+    db_user = argv[1]
+    db_passwd = argv[2]
+    db_name = argv[3]
 
-    try:
-        cur.execute("SELECT cities.id, cities.name, states.name FROM cities INNER JOIN states WHERE state_id = states.id")
-        rows = cur.fetchall()
-        for row in rows:
-            print(row)
-    except MySQLdb.Error as e:
-        print("MySQL Error: %s" % str(e))
+    database = MySQLdb.connect(host='localhost',
+                               port=3306,
+                               user=db_user,
+                               passwd=db_passwd,
+                               db=db_name)
 
-    cur.close()
-    db.close()
+    cursor = database.cursor()
+
+    cursor.execute('SELECT cities.id, cities.name, states.name FROM cities\
+                   JOIN states\
+                   ON cities.state_id = states.id\
+                   ORDER BY cities.id ASC')
+
+    for row in cursor.fetchall():
+        print(row)
