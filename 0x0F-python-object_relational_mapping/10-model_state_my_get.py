@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" prints the first State object from the database hbtn_0e_6_usa """
-
+""" prints the State object with the name passed as argument from the database hbtn_0e_6_usa """
 if __name__ == "__main__":
     from model_state import Base, State
     from sys import argv
@@ -16,8 +15,8 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).first()
+    state = session.query(State).filter_by(name=argv[4]).first()
     if(state):
-        print("{}: {}".format(state.id, state.name))
+        print(state.id)
     else:
-        print('Nothing')
+        print("Not found")
