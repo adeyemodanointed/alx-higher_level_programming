@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" lists all State objects that contain the letter a from the database hbtn_0e_6_usa """
+"""
+lists all State objects that contain the letter
+a from the database hbtn_0e_6_usa
+"""
 if __name__ == "__main__":
     from model_state import Base, State
     from sys import argv
@@ -16,5 +19,5 @@ if __name__ == "__main__":
     session = Session()
 
     for state in session.query(State).order_by(State.id):
-        if('a' in state.name):
+        if ('a' in state.name):
             print("{}: {}".format(state.id, state.name))
